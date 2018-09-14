@@ -1,4 +1,11 @@
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost:27017/myFitness', {useNewUrlParser: true});
-mongoose.connect('mongodb://test123:test123@ds022408.mlab.com:22408/assignment1web', {useNewUrlParser: true});
+const config = require('../../config');
+
+let dbHost = config.dbHost;
+let dbUser = config.dbUser;
+let dbPass = config.dbPass;
+let dbPort = config.dbPort;
+let dbName = config.dbName;
+
+mongoose.connect(`mongodb://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}`, {useNewUrlParser: true});
 

@@ -65,3 +65,6 @@ node_modules/
 
 #IDE config
 .idea/
+
+#config file
+config.js
