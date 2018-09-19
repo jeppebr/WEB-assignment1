@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-const config = require('../../config');
+const config = require('../../../../config');
 
 let dbHost = config.dbHost;
 let dbUser = config.dbUser;
