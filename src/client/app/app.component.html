@@ -3,45 +3,11 @@
     <h1>Welcome to {{ title }}</h1>
     <div class="row">
         <div class="col-md-6">
-            <table class="table">
-                <thead>
-                    <th>Exercise</th>
-                    <th>Description</th>
-                    <th>Set</th>
-                    <th>Reps/time</th>
-                    <th>
-                        <form class="form-group" action="/deleteSchedule" method="POST"><input type="hidden"
-                                                                                               name="scheduleId"
-                                                                                               value="5b97a214543b02176c3a6205">
-                            <button class="btn btn-default float-right" type="submit"><i class="fas fa-trash-alt"></i>
-                            </button>
-                        </form>
-                    </th>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><!--Exercise--></td>
-                    <td><!--Description--></td>
-                    <td><!--Set--></td>
-                    <td><!--Reps--></td>
-                    <td>
-                        <form class="form-group" action="/deleteScheduleExercise" method="POST">
-                            <input type="hidden" name="scheduleId" value=""><!---->
-                            <input type="hidden" name="exerciseId" value=""><!---->
-                            <button class="btn btn-default float-right">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <app-schedule></app-schedule>
             <app-add-exercise></app-add-exercise>
         </div>
         <div class="col-md-6">
-            <form class="form-group" action="/postSchedule" method="POST">
-                <button class="add-schedule-button" type="submit">Create a new schedule</button>
-            </form>
+            <app-add-schedule></app-add-schedule>
         </div>
     </div>
 </div>

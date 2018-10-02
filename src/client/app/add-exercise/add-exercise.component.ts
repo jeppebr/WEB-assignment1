@@ -6,8 +6,6 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./add-exercise.component.css']
 })
 export class AddExerciseComponent implements OnInit {
-
-
     addExercise = function () {
         alert("add exercise activated");
     }
