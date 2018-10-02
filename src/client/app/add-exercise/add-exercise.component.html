@@ -1,0 +1,17 @@
+<form class="form-group" method="POST">
+  <input type="hidden" name="scheduleId" value=""><!---->
+  <table class="table table-borderless">
+    <tr>
+      <td><input class="form-control" name="exerciseName" type="text" placeholder="Exercise" required>
+      </td>
+      <td><input class="form-control" name="description" type="text" placeholder="Description"
+                 required>
+      </td>
+      <td><input class="form-control" name="set" type="number" value="0"></td>
+      <td><input class="form-control" name="reps" type="number" value="0"></td>
+      <td>
+        <button class="btn btn-default" (click)="addExercise()" type="submit"><i class="fas fa-plus"></i></button>
+      </td>
+    </tr>
+  </table>
+</form>
