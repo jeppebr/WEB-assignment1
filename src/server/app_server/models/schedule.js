@@ -12,4 +12,12 @@ var scheduleSchema = new Schema({
     ]
 });
 
-module.exports = scheduleSchema;
+var userSchema = new Schema({
+    email: String, 
+    password: String
+})
+
+module.exports = {
+    scheduleSchema,
+    userSchema
+}
