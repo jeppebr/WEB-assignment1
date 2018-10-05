@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Schedule} from "../models/schedule";
+import {Exercise} from "../models/exercise";
 
 @Component({
     selector: 'app-schedules',
@@ -9,19 +10,24 @@ import {Schedule} from "../models/schedule";
 
 export class SchedulesComponent implements OnInit {
 
-    schedules = [{}];
+    schedules: Array<Schedule> = [];
 
-    deleteSchedule = function () {
-        alert("Delete schedule activated");
+    deleteSchedule(scheduleIndex: number) {
+        this.schedules.splice(scheduleIndex, 1);
     }
 
-    deleteScheduleExercise = function () {
-        alert("Delete schedule exercise activated");
+    deleteScheduleExercise(scheduleIndex: number, exerciseIndex: number) {
+        this.schedules[scheduleIndex].exercises.splice(exerciseIndex, 1);
     }
-
 
     addSchedule() {
-        this.schedules.push(new Schedule(1, ""))
+        const exercises: Array<Exercise> = [];
+
+        this.schedules.push(new Schedule(this.schedules.length, "", exercises))
+    }
+
+    addExercise = function (scheduleIndex: number) {
+        this.schedules[scheduleIndex].exercises.push(new Exercise(0, "name", "des", 1, 2));
     }
 
     constructor() {

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6" *ngFor="let schedule of schedules">
+    <div class="col-md-6" *ngFor="let schedule of schedules; let scheduleIndex=index">
         <table class="table" >
             <thead>
             <th>Exercise</th>
@@ -9,23 +9,23 @@
             <th>
                 <form class="form-group">
                     <input type="hidden" name="scheduleId" value="5b97a214543b02176c3a6205">
-                    <button class="btn btn-default float-right" (click)="deleteSchedule()">
+                    <button class="btn btn-default float-right" (click)="deleteSchedule(scheduleIndex)">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </form>
             </th>
             </thead>
             <tbody>
-            <tr>
-                <td><!--Exercise--></td>
-                <td><!--Description--></td>
-                <td><!--Set--></td>
-                <td><!--Reps--></td>
+            <tr *ngFor="let exercise of schedule.exercises; let exerciseIndex=index">
+                <td>{{exercise.exercise}}</td>
+                <td>{{exercise.description}}</td>
+                <td>{{exercise.set}}</td>
+                <td>{{exercise.reps}}</td>
                 <td>
                     <form class="form-group">
-                        <input type="hidden" name="scheduleId" value=""><!---->
-                        <input type="hidden" name="exerciseId" value=""><!---->
-                        <button class="btn btn-default float-right" (click)="deleteScheduleExercise()">
+                        <input type="hidden" name="scheduleId" value="">
+                        <input type="hidden" name="exerciseId" value="">
+                        <button class="btn btn-default float-right" (click)="deleteScheduleExercise(scheduleIndex, exerciseIndex)">
                             <i class="fas fa-times"></i>
                         </button>
                     </form>
@@ -33,7 +33,30 @@
             </tr>
             </tbody>
         </table>
-        <app-add-exercise></app-add-exercise>
+        <form class="form-group">
+            <input type="hidden" value="">
+            <table class="table table-borderless">
+                <tr>
+                    <td>
+                        <input class="form-control" name="exerciseName" type="text" placeholder="Exercise" required>
+                    </td>
+                    <td>
+                        <input class="form-control" name="description" type="text" placeholder="Description" required>
+                    </td>
+                    <td>
+                        <input class="form-control" name="set" type="number" value="0" title="set">
+                    </td>
+                    <td>
+                        <input class="form-control" name="reps" type="number" value="0" title="reps">
+                    </td>
+                    <td>
+                        <button class="btn btn-default" (click)="addExercise(scheduleIndex)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </form>
     </div>
     <form class="form-group">
         <button class="add-schedule-button" (click)="addSchedule()" >Create a new schedule</button>
