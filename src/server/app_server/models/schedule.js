@@ -2,22 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var scheduleSchema = new Schema({
-    exercises: [
-        {
-            exerciseName: String,
-            description: String,
-            set: Number,
-            reps: Number
-        }
-    ]
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
-var userSchema = new Schema({
-    email: String, 
-    password: String
-})
-
-module.exports = {
-    scheduleSchema,
-    userSchema
-}
+module.exports = scheduleSchema;
