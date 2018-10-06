@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6" *ngFor="let schedule of schedules; let scheduleIndex=index">
-        <table class="table" >
+        <table class="table">
             <thead>
             <th>Exercise</th>
             <th>Description</th>
@@ -9,7 +9,7 @@
             <th>
                 <form class="form-group">
                     <input type="hidden" name="scheduleId" value="5b97a214543b02176c3a6205">
-                    <button class="btn btn-default float-right" (click)="deleteSchedule(scheduleIndex)">
+                    <button class="btn btn-default float-right" (click)="deleteSchedule(scheduleIndex)" type='button'>
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </form>
@@ -25,7 +25,8 @@
                     <form class="form-group">
                         <input type="hidden" name="scheduleId" value="">
                         <input type="hidden" name="exerciseId" value="">
-                        <button class="btn btn-default float-right" (click)="deleteScheduleExercise(scheduleIndex, exerciseIndex)">
+                        <button class="btn btn-default float-right"
+                                (click)="deleteScheduleExercise(scheduleIndex, exerciseIndex)" type='button'>
                             <i class="fas fa-times"></i>
                         </button>
                     </form>
@@ -50,7 +51,7 @@
                         <input class="form-control" name="reps" type="number" value="0" title="reps">
                     </td>
                     <td>
-                        <button class="btn btn-default" (click)="addExercise(scheduleIndex)">
+                        <button class="btn btn-default" (click)="addExercise(scheduleIndex)" type='button'>
                             <i class="fas fa-plus"></i>
                         </button>
                     </td>
@@ -59,6 +60,6 @@
         </form>
     </div>
     <form class="form-group">
-        <button class="add-schedule-button" (click)="addSchedule()" >Create a new schedule</button>
+        <button class="add-schedule-button" (click)="addSchedule()" type='button'>Create a new schedule</button>
     </form>
 </div>
