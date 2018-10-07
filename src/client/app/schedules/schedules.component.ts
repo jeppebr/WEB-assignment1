@@ -1,16 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 import {Schedule} from "../models/schedule";
-import {Exercise} from "../models/exercise";
+import {Exercise} from "../models/exercises";
+import {ScheduleService} from "../services/schedule.service";
 
 @Component({
     selector: 'app-schedules',
+    providers: [ScheduleService],
     templateUrl: './schedules.component.html',
     styleUrls: ['./schedules.component.css']
 })
 
 export class SchedulesComponent implements OnInit {
 
-    schedules: Array<Schedule> = [];
+    schedules: Schedule[];
+
+    constructor(private scheduleService: ScheduleService) {}
+
+    ngOnInit() {
+        this.scheduleService.getSchedules().subscribe(schedules => this.schedules = schedules);
+        alert(this.schedules);
+    }
 
     deleteSchedule(scheduleIndex: number) {
         this.schedules.splice(scheduleIndex, 1);
@@ -21,19 +30,11 @@ export class SchedulesComponent implements OnInit {
     }
 
     addSchedule() {
-        const exercises: Array<Exercise> = [];
-
-        this.schedules.push(new Schedule(this.schedules.length, "", exercises))
+        this.schedules.push(new Schedule(this.schedules.length, []))
     }
 
-    addExercise = function (scheduleIndex: number) {
+    addExercise(scheduleIndex: number) {
         this.schedules[scheduleIndex].exercises.push(new Exercise(0, "name", "des", 1, 2));
-    }
-
-    constructor() {
-    }
-
-    ngOnInit() {
     }
 
 }
