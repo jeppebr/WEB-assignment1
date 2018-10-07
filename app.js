@@ -4,15 +4,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-require('./src/server/app_server/models/db');
+require('./src/server/app_api/models/db');
 
-const indexRouter = require('./src/server/app_server/routes/index');
-var routesApi = require('./app_api/routes/index');
+var routesApi = require('./src/server/app_api/routes/index');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'src/server/app_server', 'views'));
+app.set('views', path.join(__dirname, 'src/server/app_api', 'views'));
 app.set('view engine', 'pug');
 
 var path = require('path');
@@ -24,7 +23,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/api', routesApi);
 
 // catch 404 and forward to error handler

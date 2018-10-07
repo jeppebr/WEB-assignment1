@@ -1,5 +1,4 @@
-
-const schema = require('../../src/server/app_server/models/schedule')
+const schema = require('../models/schedule')
 var mongoose = require('mongoose');
 
 
