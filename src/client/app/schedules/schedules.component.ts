@@ -18,7 +18,6 @@ export class SchedulesComponent implements OnInit {
 
     ngOnInit() {
         this.scheduleService.getSchedules().subscribe(schedules => this.schedules = schedules);
-        alert(this.schedules);
     }
 
     deleteSchedule(scheduleIndex: number) {
