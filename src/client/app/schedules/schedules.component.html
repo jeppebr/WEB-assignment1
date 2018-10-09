@@ -51,7 +51,7 @@
                         <input class="form-control" name="reps" type="number" value="0" title="reps">
                     </td>
                     <td>
-                        <button class="btn btn-default" (click)="addExercise(scheduleIndex)" type='button'>
+                        <button class="btn btn-default" (click)="postExercise(scheduleIndex)" type='button'>
                             <i class="fas fa-plus"></i>
                         </button>
                     </td>
@@ -60,6 +60,6 @@
         </form>
     </div>
     <form class="form-group">
-        <button class="add-schedule-button" (click)="addSchedule()" type='button'>Create a new schedule</button>
+        <button class="add-schedule-button" (click)="postSchedule()" type='button'>Create a new schedule</button>
     </form>
 </div>
