@@ -8,7 +8,7 @@ module.exports.postSchedule = function (request, res, next) {
 
         res
         .status(200)
-        .json({ title: 'MyFitness', schedules: schedule});
+        .json(schedule);
     });
 };
 
@@ -24,13 +24,11 @@ module.exports.postScheduleItem = function (request, res, next) {
             }
         )
         schedule.save();
-        
+
         res
         .status(200)
-        .json({ title: 'MyFitness', schedules: schedule});
+        .json(schedule);
     });
-
-
 };
 
 module.exports.deleteSchedule = function (request, res, next) {
@@ -39,7 +37,8 @@ module.exports.deleteSchedule = function (request, res, next) {
 
         res
         .status(200)
-        .json({ title: 'MyFitness', schedules: schedule});    });
+        .json(schedule);
+    });
 };
 
 module.exports.deleteScheduleExercise = function (request, res, next) {
@@ -50,6 +49,7 @@ module.exports.deleteScheduleExercise = function (request, res, next) {
 
         res
         .status(200)
-        .json({ title: 'MyFitness', schedules: schedule});    });
+        .json(schedule);
+    });
 };
 

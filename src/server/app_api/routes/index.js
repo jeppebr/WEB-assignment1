@@ -6,7 +6,7 @@ const ctrlMain= require('../controllers/mainControllers');
 
 // locations
 router
-.route('/locations') 
+.route('/locations')
 .get(ctrlLocations.locationsCreate);
 
  //schedules
@@ -14,7 +14,7 @@ router.route("/schedules")
 .get(ctrlMain.index)
 .post(ctrlSchedules.postSchedule)
 .delete(ctrlSchedules.deleteSchedule)
-.put(ctrlSchedules.postScheduleItem); 
+.put(ctrlSchedules.postScheduleItem);
 
 router.route("/schedulesexercise")
 .delete(ctrlSchedules.deleteScheduleExercise);

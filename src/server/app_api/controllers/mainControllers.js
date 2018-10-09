@@ -8,8 +8,7 @@ module.exports.index = function(req, res, next) {
 
         res
         .status(200)
-        .json({ title: 'MyFitness', schedules: schedules});
-
+        .json(schedules);
     });
 }
 
