@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,6 +7,21 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+
+    registerUser(form: NgForm) {
+      console.log("register")
+      console.log(form.value);
+      // {email: '...', password: '...'}
+      // ... <-- now use JSON.stringify() to convert form values to json.
+    }
+
+    loginUser(form: NgForm) {
+      console.log("login")
+      console.log(form.value);
+      // {email: '...', password: '...'}
+      // ... <-- now use JSON.stringify() to convert form values to json.
+    }
 
 
   sendLoginInfo() {
