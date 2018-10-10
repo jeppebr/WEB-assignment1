@@ -10,7 +10,7 @@ import { UserService } from "../services/user.service";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  user = new User("bob","alice"); 
+  user = new User("",""); 
   
   constructor(private userService: UserService) {}
 
@@ -18,22 +18,20 @@ export class LoginComponent implements OnInit {
     this.userService.postLogin(user).subscribe();
   }
 
+  postRegister(user: User) {
+    this.userService.postRegister(user).subscribe();
+  }
+
   registerUser(form: NgForm) {
-    console.log("register");
-    console.log(form.value);
+    this.user.userName = JSON.stringify(form.value.registerUserName)
+    this.user.password = JSON.stringify(form.value.registerPassword)
+    this.postRegister(this.user)
   }
 
   loginUser(form: NgForm) {
-    console.log("login");
-    console.log(form.value);
     this.user.userName = JSON.stringify(form.value.loginUserName)
     this.user.password = JSON.stringify(form.value.loginPassword)
     this.postLogin(this.user)
-    // ... <-- now use JSON.stringify() to convert form values to json.
-  }
-
-  sendLoginInfo() {
-    console.log("sendLoginInfo");
   }
 
   ngOnInit() {}
