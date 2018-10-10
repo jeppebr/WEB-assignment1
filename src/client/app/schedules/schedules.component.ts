@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Schedule} from "../models/schedule";
-import {Exercise} from "../models/exercises";
 import {ScheduleService} from "../services/schedule.service";
 import {ExerciseService} from "../services/exercise.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
     selector: 'app-schedules',
@@ -22,7 +22,9 @@ export class SchedulesComponent implements OnInit {
     }
 
     //Schedules
-    deleteSchedule(scheduleIndex: number) {
+    deleteSchedule(scheduleId: number) {
+        var scheduleIndex = this.schedules.findIndex(schedule => schedule._id === scheduleId);
+
         this.scheduleService.deleteSchedule(this.schedules[scheduleIndex]).subscribe();
         this.schedules.splice(scheduleIndex, 1);
     }
@@ -32,13 +34,27 @@ export class SchedulesComponent implements OnInit {
     }
 
     //Exercises
-    postExercise(scheduleIndex: number) {
-        this.schedules[scheduleIndex].exercises.push(new Exercise(0, "name", "des", 1, 2));
+    postExercise(form: NgForm, scheduleId: number) {
+        var scheduleIndex = this.schedules.findIndex(schedule => schedule._id === scheduleId);
+        var body = {
+            exerciseName: form.value.exerciseName,
+            description: form.value.description,
+            set: form.value.set,
+            reps: form.value.reps
+        }
+        this.exerciseService.postExercise(this.schedules[scheduleIndex], body).subscribe(
+            exercise => this.schedules[scheduleIndex].exercises.push(exercise)
+        );
     }
 
-    deleteExercise(scheduleIndex: number, exerciseIndex: number) {
-        this.exerciseService.deleteExercise(this.schedules[scheduleIndex], this.schedules[scheduleIndex].exercises[exerciseIndex]).subscribe();
-        this.schedules[scheduleIndex].exercises.splice(exerciseIndex, 1);
+    deleteExercise(scheduleId: number, exerciseId: number) {
+        var scheduleIndex = this.schedules.findIndex(schedule => schedule._id === scheduleId);
+        var schedule: Schedule = this.schedules[scheduleIndex];
+
+        var exerciseIndex = schedule.exercises.findIndex(exercise => exercise._id === exerciseId);
+
+        this.exerciseService.deleteExercise(schedule, schedule.exercises[exerciseIndex]).subscribe();
+        schedule.exercises.splice(exerciseIndex, 1);
     }
 
 }
