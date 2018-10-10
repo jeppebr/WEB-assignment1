@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Schedule} from "../models/schedule";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -20,13 +20,6 @@ export class ScheduleService {
   }
 
   deleteSchedule(schedule: Schedule): Observable<Schedule> {
-      let options = {
-          headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-          }),
-          body: {scheduleId: schedule._id},
-      };
-
-      return this.http.delete<Schedule>("http://localhost:3000/api/schedules", options);
+      return this.http.delete<Schedule>(`http://localhost:3000/api/schedules/${schedule._id}`);
   }
 }
