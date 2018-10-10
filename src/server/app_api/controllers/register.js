@@ -12,9 +12,6 @@ module.exports.registerCreate = function(req, res) {
     console.log(req.body.username)
     console.log(req.body.password)
 
-
-
-
     res
     .status(200)
     .json({"message" : "Register request received"});

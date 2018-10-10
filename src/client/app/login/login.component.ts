@@ -33,6 +33,10 @@ export class LoginComponent implements OnInit {
     this.user.password = JSON.stringify(form.value.loginPassword)
     this.postLogin(this.user)
   }
+  
+  logout() {
+    console.log("logging out")
+  }
 
   ngOnInit() {}
 }
