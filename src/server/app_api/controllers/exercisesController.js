@@ -22,9 +22,10 @@ module.exports.postScheduleItem = function (request, res, next) {
 };
 
 module.exports.deleteScheduleExercise = function (request, res, next) {
-    mongoose.model('scheduleModel', scheduleSchema).findById(new ObjectId(request.body['scheduleId']), function (err, schedule) {
+    mongoose.model('scheduleModel', scheduleSchema).findById(new ObjectId(request.params.scheduleId), function (err, schedule) {
         if (err) return handleError(err);
-        schedule.exercises.pull(request.body['exerciseId']);
+        // schedule.exercises.pull(request.body['exerciseId']);
+        // TODO select correct exercise and delete
         schedule.save();
 
         res

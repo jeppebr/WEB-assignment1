@@ -19,9 +19,9 @@ router.route("/schedules/:scheduleId")
     .delete(ctrlSchedules.deleteSchedule);
 
 //exercises
-router.route("/schedules/:scheduleId/exercise")
+router.route("/schedules/:scheduleId/exercises")
     .post(ctrlExercises.postScheduleItem)
-router.route("/schedules/:scheduleId/exercise/:exerciseId")
+router.route("/schedules/:scheduleId/exercises/:exerciseId")
     .delete(ctrlExercises.deleteScheduleExercise);
 
 router.route('/login')

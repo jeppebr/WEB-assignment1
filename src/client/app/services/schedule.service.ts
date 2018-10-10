@@ -20,6 +20,6 @@ export class ScheduleService {
   }
 
   deleteSchedule(schedule: Schedule): Observable<Schedule> {
-      return this.http.delete<Schedule>("http://localhost:3000/api/schedules/"+schedule._id);
+      return this.http.delete<Schedule>(`http://localhost:3000/api/schedules/${schedule._id}`);
   }
 }
