@@ -4,6 +4,7 @@ const ctrlLocations= require('../controllers/locations');
 const ctrlSchedules= require('../controllers/schedulesController');
 const ctrlExercises= require('../controllers/exercisesController');
 const ctrlLogin= require('../controllers/login');
+const ctrlRegister = require('../controllers/register');
 
 // locations
 router
@@ -27,5 +28,8 @@ router.route("/schedules/:scheduleId/exercises/:exerciseId")
 
 router.route('/login')
     .post(ctrlLogin.loginCreate);
+
+router.route('/register')
+.post(ctrlRegister.registerCreate);
 
 module.exports = router;
