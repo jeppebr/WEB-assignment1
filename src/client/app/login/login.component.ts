@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   loginUser(form: NgForm) {
     console.log("login");
     console.log(form.value);
+    console.log(JSON.stringify(form.value.loginUserName))
     this.user.userName = JSON.stringify(form.value.loginUserName)
     this.user.password = JSON.stringify(form.value.loginPassword)
     this.postLogin(this.user)

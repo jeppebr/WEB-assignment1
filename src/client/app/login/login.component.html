@@ -1,35 +1,21 @@
 
-      <!-- <form id="myForm">
-        <label for="uname"><b>Username</b></label><br>
-        <input type="text" placeholder="Enter Username" name="uname" required>
-        <br>
-   
-        <label for="psw"><b>Password</b></label><br>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-      </form> 
-
-
-    <form class="myForm">
-        <button (click)="sendLoginInfo()" type='button'>Login</button>
-    </form>
-     -->
 
     <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
         <label for="email">Email</label>
-        <input type="text" name="email" id="registerUserName" ngModel>
+        <input type="text" name="registerUserName" id="registerUserName" ngModel>
       
         <label for="password">Password</label>
-        <input type="password" name="password" id="registerPassword" ngModel>
+        <input type="password" name="registerPassword" id="registerPassword" ngModel>
       
         <button type="submit">Register</button>
       </form>
 
       <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
           <label for="email">Email</label>
-          <input type="text" name="email" id="loginUserName" ngModel>
+          <input type="text" name="loginUserName" id="loginUserName" ngModel>
         
           <label for="password">Password</label>
-          <input type="password" name="password" id="loginPassword" ngModel>
+          <input type="password" name="loginPassword" id="loginPassword" ngModel>
         
           <button type="submit">login</button>
         </form>
