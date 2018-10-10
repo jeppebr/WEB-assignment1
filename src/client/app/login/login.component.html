@@ -1,7 +1,7 @@
 
 
     <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
-        <label for="email">Email</label>
+        <label for="email">Username</label>
         <input type="text" name="registerUserName" id="registerUserName" ngModel>
       
         <label for="password">Password</label>
@@ -11,11 +11,13 @@
       </form>
 
       <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
-          <label for="email">Email</label>
+          <label for="email">Username</label>
           <input type="text" name="loginUserName" id="loginUserName" ngModel>
         
           <label for="password">Password</label>
           <input type="password" name="loginPassword" id="loginPassword" ngModel>
         
           <button type="submit">login</button>
-        </form>
+    </form>
+
+    <button (click)="logout()" type='button'>Logout</button>
