@@ -1,14 +1,12 @@
-import {Exercise} from "./exercise";
+import {Exercise} from "./exercises";
 
 export class Schedule {
 
-    constructor(id: number, name: string, exercises: Array<Exercise>) {
-        this.id = id;
-        this.name = name;
+    constructor(id: number, exercises: Array<Exercise>) {
+        this._id = id;
         this.exercises = exercises;
     }
 
-    id: number;
-    name: string;
+    _id: number;
     exercises: Array<Exercise>;
 }

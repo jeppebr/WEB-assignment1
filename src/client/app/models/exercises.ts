@@ -1,14 +1,14 @@
 export class Exercise {
 
-    constructor(id: number, exercise: string, description: string, set: number, reps: number) {
-        this.id = id;
+    constructor(_id: number, exercise: string, description: string, set: number, reps: number) {
+        this._id = _id;
         this.exercise = exercise;
         this.description = description;
         this.set = set;
         this.reps = reps;
     }
 
-    id: number;
+    _id: number;
     exercise: string;
     description: string;
     set: number;
