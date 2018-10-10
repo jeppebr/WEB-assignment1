@@ -16,20 +16,20 @@
 
     <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
         <label for="email">Email</label>
-        <input type="text" name="email" id="email" ngModel>
+        <input type="text" name="email" id="registerUserName" ngModel>
       
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" ngModel>
+        <input type="password" name="password" id="registerPassword" ngModel>
       
         <button type="submit">Register</button>
       </form>
 
       <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
           <label for="email">Email</label>
-          <input type="text" name="email" id="email" ngModel>
+          <input type="text" name="email" id="loginUserName" ngModel>
         
           <label for="password">Password</label>
-          <input type="password" name="password" id="password" ngModel>
+          <input type="password" name="password" id="loginPassword" ngModel>
         
           <button type="submit">login</button>
         </form>

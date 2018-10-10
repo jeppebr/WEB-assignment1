@@ -3,6 +3,7 @@ const router = express.Router();
 const ctrlLocations= require('../controllers/locations');
 const ctrlSchedules= require('../controllers/schedulesController');
 const ctrlMain= require('../controllers/mainControllers');
+const ctrlLogin= require('../controllers/login');
 
 // locations
 router
@@ -18,5 +19,8 @@ router.route("/schedules")
 
 router.route("/schedulesexercise")
 .delete(ctrlSchedules.deleteScheduleExercise);
+
+router.route('/login')
+.post(ctrlLogin.loginCreate);
 
 module.exports = router;

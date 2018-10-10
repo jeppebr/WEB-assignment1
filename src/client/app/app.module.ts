@@ -5,12 +5,9 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {SchedulesComponent} from './schedules/schedules.component';
-<<<<<<< HEAD
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-=======
 import {ScheduleService} from "./services/schedule.service";
 import {HttpClientModule} from "@angular/common/http";
->>>>>>> master
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,12 +28,9 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-<<<<<<< HEAD
     FormsModule,
     ReactiveFormsModule,
-=======
-      HttpClientModule,
->>>>>>> master
+    HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
