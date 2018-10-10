@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from "../models/user";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {API_URL} from '../../app-config';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,6 @@ export class UserService {
       },
   };
 
-  return this.http.post<User>("http://localhost:3000/api/login", body);
+  return this.http.post<User>(`${API_URL}/login`, body);
   }
 }
