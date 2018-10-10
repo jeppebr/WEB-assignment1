@@ -2,25 +2,29 @@ const express = require('express');
 const router = express.Router();
 const ctrlLocations= require('../controllers/locations');
 const ctrlSchedules= require('../controllers/schedulesController');
-const ctrlMain= require('../controllers/mainControllers');
+const ctrlExercises= require('../controllers/exercisesController');
 const ctrlLogin= require('../controllers/login');
 
 // locations
 router
 .route('/locations')
-.get(ctrlLocations.locationsCreate);
+    .get(ctrlLocations.locationsCreate);
 
  //schedules
 router.route("/schedules")
-.get(ctrlMain.index)
-.post(ctrlSchedules.postSchedule)
-.delete(ctrlSchedules.deleteSchedule)
-.put(ctrlSchedules.postScheduleItem);
+    .get(ctrlSchedules.getSchedules)
+    .post(ctrlSchedules.postSchedule);
 
-router.route("/schedulesexercise")
-.delete(ctrlSchedules.deleteScheduleExercise);
+router.route("/schedules/:scheduleId")
+    .delete(ctrlSchedules.deleteSchedule);
+
+//exercises
+router.route("/schedules/:scheduleId/exercise")
+    .post(ctrlExercises.postScheduleItem)
+router.route("/schedules/:scheduleId/exercise/:exerciseId")
+    .delete(ctrlExercises.deleteScheduleExercise);
 
 router.route('/login')
-.post(ctrlLogin.loginCreate);
+    .post(ctrlLogin.loginCreate);
 
 module.exports = router;
