@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6" *ngFor="let schedule of schedules; let scheduleIndex=index">
+    <div class="col-md-6" *ngFor="let schedule of schedules">
         <table class="table">
             <thead>
             <th>Exercise</th>
@@ -9,15 +9,15 @@
             <th>
                 <form class="form-group">
                     <input type="hidden" name="scheduleId" value="5b97a214543b02176c3a6205">
-                    <button class="btn btn-default float-right" (click)="deleteSchedule(scheduleIndex)" type='button'>
+                    <button class="btn btn-default float-right" (click)="deleteSchedule(schedule._id)" type='button'>
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </form>
             </th>
             </thead>
             <tbody>
-            <tr *ngFor="let exercise of schedule.exercises; let exerciseIndex=index">
-                <td>{{exercise.exercise}}</td>
+            <tr *ngFor="let exercise of schedule.exercises">
+                <td>{{exercise.exerciseName}}</td>
                 <td>{{exercise.description}}</td>
                 <td>{{exercise.set}}</td>
                 <td>{{exercise.reps}}</td>
@@ -26,7 +26,7 @@
                         <input type="hidden" name="scheduleId" value="">
                         <input type="hidden" name="exerciseId" value="">
                         <button class="btn btn-default float-right"
-                                (click)="deleteExercise(scheduleIndex, exerciseIndex)" type='button'>
+                                (click)="deleteExercise(schedule._id, exercise._id)" type='button'>
                             <i class="fas fa-times"></i>
                         </button>
                     </form>
@@ -34,24 +34,24 @@
             </tr>
             </tbody>
         </table>
-        <form class="form-group">
+        <form class="form-group" #signupForm="ngForm" (ngSubmit)="postExercise(signupForm, schedule._id)">
             <input type="hidden" value="">
             <table class="table table-borderless">
                 <tr>
                     <td>
-                        <input class="form-control" name="exerciseName" type="text" placeholder="Exercise" required>
+                        <input class="form-control" name="exerciseName" type="text" placeholder="Exercise" required ngModel>
                     </td>
                     <td>
-                        <input class="form-control" name="description" type="text" placeholder="Description" required>
+                        <input class="form-control" name="description" type="text" placeholder="Description" required ngModel>
                     </td>
                     <td>
-                        <input class="form-control" name="set" type="number" value="0" title="set">
+                        <input class="form-control" name="set" type="number" value="0" title="set" ngModel>
                     </td>
                     <td>
-                        <input class="form-control" name="reps" type="number" value="0" title="reps">
+                        <input class="form-control" name="reps" type="number" value="0" title="reps" ngModel>
                     </td>
                     <td>
-                        <button class="btn btn-default" (click)="postExercise(scheduleIndex)" type='button'>
+                        <button class="btn btn-default" type='submit'>
                             <i class="fas fa-plus"></i>
                         </button>
                     </td>

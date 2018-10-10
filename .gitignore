@@ -108,4 +108,4 @@ node_modules/
 
 #config files
 config.js
-app-config.ts
+src/client/app-config.ts

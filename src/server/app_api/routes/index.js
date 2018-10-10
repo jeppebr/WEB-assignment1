@@ -20,9 +20,10 @@ router.route("/schedules/:scheduleId")
 
 //exercises
 router.route("/schedules/:scheduleId/exercises")
-    .post(ctrlExercises.postScheduleItem)
+    .get(ctrlExercises.getExercises)
+    .post(ctrlExercises.postExercise)
 router.route("/schedules/:scheduleId/exercises/:exerciseId")
-    .delete(ctrlExercises.deleteScheduleExercise);
+    .delete(ctrlExercises.deleteExercise);
 
 router.route('/login')
     .post(ctrlLogin.loginCreate);
