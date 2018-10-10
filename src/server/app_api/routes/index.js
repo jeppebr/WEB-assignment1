@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const ctrlLocations= require('../controllers/locations');
-const ctrlSchedules= require('../controllers/schedulesController');
-const ctrlMain= require('../controllers/mainControllers');
-const ctrlLogin= require('../controllers/login');
+const ctrlLocations = require('../controllers/locations');
+const ctrlSchedules = require('../controllers/schedulesController');
+const ctrlMain = require('../controllers/mainControllers');
+const ctrlLogin = require('../controllers/login');
+const ctrlRegister = require('../controllers/register');
 
 // locations
 router
@@ -22,5 +23,8 @@ router.route("/schedulesexercise")
 
 router.route('/login')
 .post(ctrlLogin.loginCreate);
+
+router.route('/register')
+.post(ctrlRegister.registerCreate);
 
 module.exports = router;

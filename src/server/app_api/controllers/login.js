@@ -2,6 +2,7 @@
 module.exports.loginCreate = function(req, res) { 
     // console.log(req.query.password)
     // console.log(req.query.userName)
+    console.log("logging in the user ")
     console.log(req.body)
     
     console.log(req.body.username)

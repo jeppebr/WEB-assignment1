@@ -23,4 +23,20 @@ export class UserService {
 
     return this.http.post<User>("http://localhost:3000/api/login", options.body, options);
   }
+
+  postRegister(user: User): Observable<User> {
+
+    let options = {
+      headers: new HttpHeaders({
+        "Content-Type": 'application/json'
+      }),
+      body: {
+        username: user.userName,
+        password: user.password
+      }
+    };
+
+    return this.http.post<User>("http://localhost:3000/api/register", options.body, options);
+  }
+
 }
