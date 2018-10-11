@@ -15,7 +15,13 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   postLogin(user: User) {
-    this.userService.postLogin(user).subscribe();
+    this.userService.postLogin(user).subscribe(
+      res => {
+        console.log(res)
+        localStorage.setItem('token', JSON.stringify(res))
+      },
+      err => console.log(err)
+    );
   }
 
   postRegister(user: User) {
@@ -23,7 +29,10 @@ export class LoginComponent implements OnInit {
     .subscribe(
       res => {
         console.log(res)
-        localStorage.setItem('token',JSON.stringify(res))
+        localStorage.setItem('token', JSON.stringify(res))
+        let token = localStorage.getItem('token')
+        let jsonToken = JSON.parse(token)
+        console.log("getting the token again:",jsonToken.token)
       },
       err => console.log(err)
     );

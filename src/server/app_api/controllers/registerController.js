@@ -12,14 +12,13 @@ module.exports.registerCreate = function(req, res) {
     
     console.log(req.body.username)
     console.log(req.body.password)
-
-
-
-    // TODO return a JWT token to the user
     
     // If user has been succesfully saved 
-    let user = req.body.username
-    let payload = { subject: user._id }
+    let username = req.body.username
+    // TODO use the database identifier instead of username here, since username might not be unique
+    console.log(username._id) // <-- like this 
+    
+    let payload = { subject: username }
     let token = jwt.sign(payload, 'secretkeythatisverylongandanoying')
     res.status(200).send({token})
 
