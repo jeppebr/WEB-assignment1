@@ -28,7 +28,7 @@ export class SchedulesComponent implements OnInit {
 
     ngOnInit() {
         this.scheduleService.getSchedules().subscribe(schedules => this.schedules = schedules);
-        this.user = new User("Deloris", [], []);
+        this.user = new User("Deloris", "",[], []);
     }
 
     //Schedules

@@ -5,18 +5,12 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {SchedulesComponent} from './schedules/schedules.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ScheduleService} from "./services/schedule.service";
 import {HttpClientModule} from "@angular/common/http";
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  }
+  { path: '', component: AppComponent }
 ];
 
 @NgModule({

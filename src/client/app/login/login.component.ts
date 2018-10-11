@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { NgForm } from "@angular/forms";
-import { User } from "../models/user";
-import { UserService } from "../services/user.service";
+import {Component, OnInit} from "@angular/core";
+import {NgForm} from "@angular/forms";
+import {User} from "../models/user";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: "app-login",
@@ -10,7 +10,7 @@ import { UserService } from "../services/user.service";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  user = new User("",""); 
+  user = new User("","", [], []);
   
   constructor(private userService: UserService) {}
 
