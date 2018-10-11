@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { NgForm } from "@angular/forms";
-import { User } from "../models/user";
-import { UserService } from "../services/user.service";
+import {Component, OnInit} from "@angular/core";
+import {NgForm} from "@angular/forms";
+import {User} from "../models/user";
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: "app-login",
@@ -10,7 +10,7 @@ import { UserService } from "../services/user.service";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  user = new User("",""); 
+  user = new User("","", [], []);
   
   constructor(private userService: UserService) {}
 
@@ -39,6 +39,10 @@ export class LoginComponent implements OnInit {
     this.user.userName = JSON.stringify(form.value.loginUserName)
     this.user.password = JSON.stringify(form.value.loginPassword)
     this.postLogin(this.user)
+  }
+  
+  logout() {
+    console.log("logging out")
   }
 
   ngOnInit() {}
