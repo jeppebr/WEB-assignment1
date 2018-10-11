@@ -1,16 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const ctrlLocations= require('../controllers/locations');
 const ctrlSchedules= require('../controllers/schedulesController');
 const ctrlExercises= require('../controllers/exercisesController');
-const ctrlLogin= require('../controllers/login');
-const ctrlRegister = require('../controllers/register');
+const ctrlLogin= require('../controllers/loginController');
+const ctrlRegister = require('../controllers/registerController');
 const ctrlLogout = require('../controllers/logoutController');
-
-// locations
-router
-.route('/locations')
-    .get(ctrlLocations.locationsCreate);
 
  //schedules
 router.route("/schedules")
@@ -27,13 +21,14 @@ router.route("/schedules/:scheduleId/exercises")
 router.route("/schedules/:scheduleId/exercises/:exerciseId")
     .delete(ctrlExercises.deleteExercise);
 
+//Authentication
 router.route('/login')
     .post(ctrlLogin.loginCreate);
 
 router.route('/register')
-.post(ctrlRegister.registerCreate);
+    .post(ctrlRegister.registerCreate);
 
 router.route('/logout')
-.post(ctrlLogout.logoutCreate);
+    .post(ctrlLogout.logoutCreate);
 
 module.exports = router;

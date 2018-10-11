@@ -26,6 +26,5 @@ module.exports.deleteSchedule = function (request, res, next) {
         schedule.remove();
 
         res.status(200).json();
-
     });
 };
