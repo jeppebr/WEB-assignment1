@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Schedule} from "../models/schedule";
+import {User} from "../models/user";
 import {ScheduleService} from "../services/schedule.service";
 import {ExerciseService} from "../services/exercise.service";
 import {NgForm} from "@angular/forms";
+import {ExerciseLog} from "../models/exerciseLog";
+import {Exercise} from "../models/exercises";
+import {ExerciseLogService} from "../services/exercise-log.service";
 
 @Component({
     selector: 'app-schedules',
@@ -13,19 +17,25 @@ import {NgForm} from "@angular/forms";
 
 export class SchedulesComponent implements OnInit {
 
+    user: User;
     schedules: Schedule[];
 
-    constructor(private scheduleService: ScheduleService, private exerciseService: ExerciseService) {}
+    constructor(
+        private scheduleService: ScheduleService,
+        private exerciseService: ExerciseService,
+        private exerciseLogService: ExerciseLogService
+    ) {}
 
     ngOnInit() {
         this.scheduleService.getSchedules().subscribe(schedules => this.schedules = schedules);
+        this.user = new User("Deloris", "",[], []);
     }
 
     //Schedules
-    deleteSchedule(scheduleId: number) {
-        var scheduleIndex = this.schedules.findIndex(schedule => schedule._id === scheduleId);
+    deleteSchedule(schedule: Schedule) {
+        const scheduleIndex = this.schedules.findIndex(schedule => schedule._id === schedule._id);
 
-        this.scheduleService.deleteSchedule(this.schedules[scheduleIndex]).subscribe();
+        this.scheduleService.deleteSchedule(schedule).subscribe();
         this.schedules.splice(scheduleIndex, 1);
     }
 
@@ -34,27 +44,32 @@ export class SchedulesComponent implements OnInit {
     }
 
     //Exercises
-    postExercise(form: NgForm, scheduleId: number) {
-        var scheduleIndex = this.schedules.findIndex(schedule => schedule._id === scheduleId);
-        var body = {
+    postExercise(form: NgForm, schedule: Schedule) {
+        const body = {
             exerciseName: form.value.exerciseName,
             description: form.value.description,
             set: form.value.set,
             reps: form.value.reps
-        }
-        this.exerciseService.postExercise(this.schedules[scheduleIndex], body).subscribe(
-            exercise => this.schedules[scheduleIndex].exercises.push(exercise)
+        };
+        this.exerciseService.postExercise(schedule, body).subscribe(
+            exercise => schedule.exercises.push(exercise)
         );
     }
 
-    deleteExercise(scheduleId: number, exerciseId: number) {
-        var scheduleIndex = this.schedules.findIndex(schedule => schedule._id === scheduleId);
-        var schedule: Schedule = this.schedules[scheduleIndex];
+    deleteExercise(schedule: Schedule, exercise: Exercise) {
+        const exerciseIndex = schedule.exercises.findIndex(exercise => exercise._id === exercise._id)
 
-        var exerciseIndex = schedule.exercises.findIndex(exercise => exercise._id === exerciseId);
-
-        this.exerciseService.deleteExercise(schedule, schedule.exercises[exerciseIndex]).subscribe();
+        this.exerciseService.deleteExercise(schedule, exercise).subscribe();
         schedule.exercises.splice(exerciseIndex, 1);
     }
 
+    logExercise(newExercise: Exercise) {
+        const newExerciseLog = new ExerciseLog(this.user, newExercise, Date.now());
+        this.user.exerciseLogs.push(newExerciseLog);
+
+        const body = {
+            exerciseId: newExercise._id
+        };
+        this.exerciseLogService.postExerciseLog(body);
+    }
 }
