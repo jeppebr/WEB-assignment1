@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-7">
         <div class="col-md-12" *ngFor="let schedule of schedules">
-            <form class="form-group" #signupForm="ngForm" (ngSubmit)="postExercise(signupForm, schedule._id)">
+            <form class="form-group" #signupForm="ngForm" (ngSubmit)="postExercise(signupForm, schedule)">
                 <table class="table" id="schedule">
                     <thead class="table-active">
                     <th>Exercise</th>
@@ -12,7 +12,7 @@
                     <th class="buttonColumn">
                         <form class="form-group">
                             <input type="hidden" name="scheduleId" value="5b97a214543b02176c3a6205">
-                            <button class="btn btn-default float-right" (click)="deleteSchedule(schedule._id)"
+                            <button class="btn btn-default float-right" (click)="deleteSchedule(schedule)"
                                     type='button'>
                                 <i class="fas fa-trash-alt"></i>
                             </button>
@@ -27,13 +27,13 @@
                         <td>{{exercise.reps}}</td>
                         <td>
                             <button class="btn btn-default float-right"
-                                    (click)="logExercise(schedule._id, exercise._id)" type='button'>
+                                    (click)="logExercise(exercise)" type='button'>
                                 <i class="fas fa-dumbbell"></i>
                             </button>
                         </td>
                         <td>
                             <button class="btn btn-default float-right"
-                                    (click)="deleteExercise(schedule._id, exercise._id)" type='button'>
+                                    (click)="deleteExercise(schedule, exercise)" type='button'>
                                 <i class="fas fa-times"></i>
                             </button>
                         </td>
