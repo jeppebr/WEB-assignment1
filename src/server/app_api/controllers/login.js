@@ -1,4 +1,7 @@
 
+
+
+
 module.exports.loginCreate = function(req, res) { 
     // console.log(req.query.password)
     // console.log(req.query.userName)
@@ -10,6 +13,8 @@ module.exports.loginCreate = function(req, res) {
     // check if the username and password is in the DB 
     // if yes give them a JWT and show a logout button 
     
+
+
     res
     .status(200)
     .json({"message" : "Login request received"});

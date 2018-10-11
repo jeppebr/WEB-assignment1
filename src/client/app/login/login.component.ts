@@ -19,7 +19,14 @@ export class LoginComponent implements OnInit {
   }
 
   postRegister(user: User) {
-    this.userService.postRegister(user).subscribe();
+    this.userService.postRegister(user)
+    .subscribe(
+      res => {
+        console.log(res)
+        localStorage.setItem('token',JSON.stringify(res))
+      },
+      err => console.log(err)
+    );
   }
 
   registerUser(form: NgForm) {
