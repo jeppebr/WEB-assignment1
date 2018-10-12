@@ -12,7 +12,6 @@ export class ExerciseLogService {
   constructor(private http: HttpClient) { }
 
     postExerciseLog(body: Object): Observable<ExerciseLog> {
-        //TODO implement url server side
-        return this.http.post<ExerciseLog>(`${API_URL}/schedules/`, body);
+        return this.http.post<ExerciseLog>(`${API_URL}/exerciseLogs`, body);
     }
 }

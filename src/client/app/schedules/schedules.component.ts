@@ -28,7 +28,7 @@ export class SchedulesComponent implements OnInit {
 
     ngOnInit() {
         this.scheduleService.getSchedules().subscribe(schedules => this.schedules = schedules);
-        this.user = new User("Deloris", "",[], []);
+        this.user = new User(0, "Deloris", "",[], []);
     }
 
     //Schedules
@@ -63,12 +63,13 @@ export class SchedulesComponent implements OnInit {
         schedule.exercises.splice(exerciseIndex, 1);
     }
 
-    logExercise(newExercise: Exercise) {
-        const newExerciseLog = new ExerciseLog(this.user, newExercise, Date.now());
+    logExercise(exercise: Exercise) {
+        const newExerciseLog = new ExerciseLog(0, this.user, exercise, Date.now());
         this.user.exerciseLogs.push(newExerciseLog);
 
         const body = {
-            exerciseId: newExercise._id
+            exercise: exercise,
+            time: Date.now()
         };
         this.exerciseLogService.postExerciseLog(body);
     }
