@@ -1,4 +1,4 @@
-<form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
+<form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)" *ngIf='!user'>
     <div class="row">
         <div class="col-md-4">
             <input class="form-control" type="text" name="registerUserName" id="registerUserName" placeholder="username"
@@ -15,7 +15,7 @@
     </div>
 </form>
 <br/>
-<form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
+<form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)" *ngIf='!user'>
     <div class="row">
         <div class="col-md-4">
             <input class="form-control" type="text" name="loginUserName" id="loginUserName" placeholder="username"
@@ -31,4 +31,4 @@
     </div>
 </form>
 
-<button (click)="logout()" type='button'>Logout</button>
+<button (click)="logout()" class="btn btn-default" type='button' *ngIf='user'>Logout</button>
