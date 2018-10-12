@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Schedule} from "../models/schedule";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {API_URL} from '../../app-config';
 
@@ -12,7 +12,13 @@ export class ScheduleService {
   constructor(private http: HttpClient) {}
 
   getSchedules(): Observable<Schedule[]> {
-      return this.http.get<Schedule[]>(`${API_URL}/schedules`);
+      let options = {
+          headers: new HttpHeaders({
+              "Content-Type": 'application/json',
+              "InterceptorSkipHeader": ''
+          })
+      };
+      return this.http.get<Schedule[]>(`${API_URL}/schedules`, options);
   }
 
   postSchedule(): Observable<Schedule> {

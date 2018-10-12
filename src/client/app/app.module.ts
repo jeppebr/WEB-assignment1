@@ -29,7 +29,9 @@ const appRoutes: Routes = [
       { enableTracing: true }
     )
   ],
-  providers: [ScheduleService,
+  providers: [
+      ScheduleService,
+      SchedulesComponent,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
