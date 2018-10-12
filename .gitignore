@@ -109,3 +109,4 @@ node_modules/
 #config files
 config.js
 src/client/app-config.ts
+src/client/app/login/login.component.ts.orig
