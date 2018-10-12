@@ -63,13 +63,14 @@ export class SchedulesComponent implements OnInit {
         schedule.exercises.splice(exerciseIndex, 1);
     }
 
-    logExercise(newExercise: Exercise) {
-        const newExerciseLog = new ExerciseLog(0, this.user, newExercise, Date.now());
+    logExercise(exercise: Exercise) {
+        const newExerciseLog = new ExerciseLog(0, this.user, exercise, Date.now());
         this.user.exerciseLogs.push(newExerciseLog);
 
         const body = {
-            exerciseId: newExercise._id
+            exercise: exercise,
+            time: Date.now()
         };
-        this.exerciseLogService.postExerciseLog(this.user, body);
+        this.exerciseLogService.postExerciseLog(body);
     }
 }
