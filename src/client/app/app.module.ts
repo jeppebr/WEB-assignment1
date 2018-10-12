@@ -5,18 +5,13 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {SchedulesComponent} from './schedules/schedules.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ScheduleService} from "./services/schedule.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {TokenInterceptorService} from './services/token-interceptor.service';
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  }
+  { path: '', component: AppComponent }
 ];
 
 @NgModule({
@@ -36,7 +31,13 @@ const appRoutes: Routes = [
       { enableTracing: true }
     )
   ],
-  providers: [ScheduleService],
+  providers: [ScheduleService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

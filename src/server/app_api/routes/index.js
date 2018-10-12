@@ -1,15 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const ctrlLocations= require('../controllers/locations');
 const ctrlSchedules= require('../controllers/schedulesController');
 const ctrlExercises= require('../controllers/exercisesController');
-const ctrlLogin= require('../controllers/login');
-const ctrlRegister = require('../controllers/register');
-
-// locations
-router
-.route('/locations')
-    .get(ctrlLocations.locationsCreate);
+const ctrlExerciseLogs= require('../controllers/exerciseLogsController');
+const ctrlLogin= require('../controllers/loginController');
+const ctrlRegister = require('../controllers/registerController');
+const ctrlLogout = require('../controllers/logoutController');
 
  //schedules
 router.route("/schedules")
@@ -21,15 +17,24 @@ router.route("/schedules/:scheduleId")
 
 //exercises
 router.route("/schedules/:scheduleId/exercises")
-    .post(ctrlExercises.postScheduleItem)
+    .get(ctrlExercises.getExercises)
+    .post(ctrlExercises.postExercise)
 router.route("/schedules/:scheduleId/exercises/:exerciseId")
-    .delete(ctrlExercises.deleteScheduleExercise);
+    .delete(ctrlExercises.deleteExercise);
 
+//exercise logs
+router.route("/users/:userId/exerciseLogs")
+    .post(ctrlExerciseLogs.postExerciseLog)
+
+//Authentication
 router.route('/login')
     .post(ctrlLogin.loginCreate);
 
 router.route('/register')
-.post(ctrlRegister.registerCreate);
+    .post(ctrlRegister.registerCreate);
+
+router.route('/logout')
+    .post(ctrlLogout.logoutCreate);
 
 router.route('/registerhash')
 .post(ctrlRegister.registerCreateHash);
