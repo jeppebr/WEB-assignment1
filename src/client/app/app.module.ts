@@ -7,7 +7,8 @@ import {RegisterComponent} from './register/register.component';
 import {SchedulesComponent} from './schedules/schedules.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ScheduleService} from "./services/schedule.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent }
@@ -30,7 +31,12 @@ const appRoutes: Routes = [
       { enableTracing: true }
     )
   ],
-  providers: [ScheduleService],
+  providers: [ScheduleService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

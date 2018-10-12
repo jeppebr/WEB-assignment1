@@ -39,5 +39,15 @@ export class UserService {
 
     return this.http.post<User>(`${API_URL}/register`, options.body, options);
   }
+  // returns true if user is logged in, false if not
+  isLoggedin() {
+    return !!localStorage.getItem('token')
+  }
 
+  // returns local browser token
+  getBrowserToken() { 
+    let token = localStorage.getItem('token')
+    let jsonToken = JSON.parse(token)
+    return jsonToken.token
+  }
 }
