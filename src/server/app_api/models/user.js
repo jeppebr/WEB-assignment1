@@ -12,20 +12,19 @@ var userSchema = new Schema({
     exerciseLogs: [exerciseLogSchema],
 })
 
- userSchema.methods.setPassword = function(clearPassword){
-    this.salt = crypto.randomBytes(saltBytes).toString('hex');
-    this.password = crypto.pbkdf2Sync(clearPassword, this.salt, iterations, keylen,
-        digest).toString('hex');
+userSchema.methods.setPassword = function (clearPassword) {
+    this.salt = crypto.randomBytes(256).toString('hex');
+    this.password = crypto.pbkdf2Sync(clearPassword, this.salt, 100000, 64, 'sha512').toString('hex');
 };
 
-module.exports = mongoose.model('user', userSchema);
-
- userSchema.methods.validPassword= function(password) {
-    lethash= crypto.pbkdf2Sync(password, this.salt, iterations, keylen,digest)
-    .toString('hex');
-    return this.hash=== hash;
+userSchema.methods.validatePassword = function (password) {
+    let hash = crypto.pbkdf2Sync(password, this.salt, 100000, 64, 'sha512').toString('hex');
+    console.log(this.password);
+    console.log(hash);
+    return this.password === hash;
 };
 
+module.exports = userSchema;
 
 
 

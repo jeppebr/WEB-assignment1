@@ -28,6 +28,7 @@ router.route("/users/:userId/exerciseLogs")
 
 //Authentication
 router.route('/login')
+    .get(ctrlRegister.temp)
     .post(ctrlLogin.loginCreate);
 
 router.route('/register')
@@ -35,9 +36,5 @@ router.route('/register')
 
 router.route('/logout')
     .post(ctrlLogout.logoutCreate);
-
-router.route('/registerhash')
-.post(ctrlRegister.registerCreateHash);
-
 
 module.exports = router;

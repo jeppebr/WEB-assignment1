@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
   }
   
   logout() {
-    console.log("logging out")
+      localStorage.removeItem('token');
   }
 
   ngOnInit() {}
