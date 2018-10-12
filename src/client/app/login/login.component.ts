@@ -1,7 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {NgForm} from "@angular/forms";
-import {User} from "../models/user";
 import {UserService} from "../services/user.service";
+import {AppComponent} from "../app.component";
+import {User} from "../models/user";
 
 @Component({
   selector: "app-login",
@@ -10,22 +11,22 @@ import {UserService} from "../services/user.service";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  user = new User(0, "","", [], []);
   
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private appComponent: AppComponent) {}
 
-  postLogin(user: User) {
-    this.userService.postLogin(user).subscribe(
+  postLogin(username: string, password: string) {
+    this.userService.postLogin(username, password).subscribe(
       res => {
         console.log(res)
         localStorage.setItem('token', JSON.stringify(res))
+          this.appComponent.setUser(new User(0, "", [], []))
       },
       err => console.log(err)
     );
   }
 
-  postRegister(user: User) {
-    this.userService.postRegister(user)
+  postRegister(username: string, password: string) {
+    this.userService.postRegister(username, password)
     .subscribe(
       res => {
         console.log(res)
@@ -39,15 +40,15 @@ export class LoginComponent implements OnInit {
   }
 
   registerUser(form: NgForm) {
-    this.user.userName = JSON.stringify(form.value.registerUserName)
-    this.user.password = JSON.stringify(form.value.registerPassword)
-    this.postRegister(this.user)
+    const userName = JSON.stringify(form.value.registerUserName)
+    const password = JSON.stringify(form.value.registerPassword)
+    this.postRegister(userName, password)
   }
 
   loginUser(form: NgForm) {
-    this.user.userName = JSON.stringify(form.value.loginUserName)
-    this.user.password = JSON.stringify(form.value.loginPassword)
-    this.postLogin(this.user)
+    const userName = JSON.stringify(form.value.loginUserName)
+    const password = JSON.stringify(form.value.loginPassword)
+    this.postLogin(userName, password);
   }
   
   logout() {

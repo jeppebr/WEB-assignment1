@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Schedule} from "../models/schedule";
-import {User} from "../models/user";
 import {ScheduleService} from "../services/schedule.service";
 import {ExerciseService} from "../services/exercise.service";
 import {NgForm} from "@angular/forms";
 import {ExerciseLog} from "../models/exerciseLog";
 import {Exercise} from "../models/exercises";
 import {ExerciseLogService} from "../services/exercise-log.service";
+import {AppComponent} from "../app.component";
 
 @Component({
     selector: 'app-schedules',
@@ -17,18 +17,21 @@ import {ExerciseLogService} from "../services/exercise-log.service";
 
 export class SchedulesComponent implements OnInit {
 
-    user: User;
-    schedules: Schedule[];
+    schedules: Schedule[] = [];
+    exerciseLogs: ExerciseLog[] = [];
 
     constructor(
         private scheduleService: ScheduleService,
         private exerciseService: ExerciseService,
-        private exerciseLogService: ExerciseLogService
+        private exerciseLogService: ExerciseLogService,
+        private appComponent: AppComponent
     ) {}
 
     ngOnInit() {
+        if (this.appComponent.getUser() != undefined){
+            this.exerciseLogs = this.appComponent.getUser().exerciseLogs;
+        }
         this.scheduleService.getSchedules().subscribe(schedules => this.schedules = schedules);
-        this.user = new User(0, "Deloris", "",[], []);
     }
 
     //Schedules
@@ -64,8 +67,8 @@ export class SchedulesComponent implements OnInit {
     }
 
     logExercise(exercise: Exercise) {
-        const newExerciseLog = new ExerciseLog(0, this.user, exercise, Date.now());
-        this.user.exerciseLogs.push(newExerciseLog);
+        const newExerciseLog = new ExerciseLog(0, this.appComponent.getUser(), exercise, Date.now());
+        this.exerciseLogs.push(newExerciseLog);
 
         const body = {
             exercise: exercise,
