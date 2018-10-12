@@ -12,6 +12,18 @@ module.exports.getExercises = function(req, res, next) {
 }
 
 module.exports.postExercise = function (request, res, next) {
+    //code that check token -start
+    let shouldTerminate = false 
+    jwt.verifyToken(request, res, (payload,err) =>{
+        if (err){
+            console.log("returning error")
+            shouldTerminate = true; 
+            return res.status(401).send("Request is not authorized")
+        }
+    })
+    if (shouldTerminate){ return }
+
+      //code that check token -end
 
     mongoose.model('scheduleModel', scheduleSchema).findById(request.params.scheduleId, function (err, schedule) {
         if (err) return handleError(err);
@@ -34,6 +46,18 @@ module.exports.postExercise = function (request, res, next) {
 };
 
 module.exports.deleteExercise = function (request, res, next) {
+    //code that check token -start
+    let shouldTerminate = false 
+    jwt.verifyToken(request, res, (payload,err) =>{
+        if (err){
+            console.log("returning error")
+            shouldTerminate = true; 
+            return res.status(401).send("Request is not authorized")
+        }
+    })
+    if (shouldTerminate){ return }
+
+      //code that check token -end
  
     mongoose.model('scheduleModel', scheduleSchema).findById(request.params.scheduleId, function (err, schedule) {
         if (err) return handleError(err);

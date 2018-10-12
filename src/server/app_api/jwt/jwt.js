@@ -23,7 +23,6 @@ module.exports.verify = function(token, callback) {
 }
 module.exports.verifyToken = function (req, res, callback) {
     let authToken = req.headers.authorization
-
     if (!authToken) {
         return res.status(401).send("Request is not authorized")
     }
