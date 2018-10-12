@@ -18,10 +18,8 @@ export class UserService {
         "InterceptorSkipHeader": ''
       })
     };
-    return this.http.get<User>(`${API_URL}/login/${username}`, options); // should be id not username.
+    return this.http.get<User>(`${API_URL}/login/${username}`, options);
   }
-
-
 
   postLogin(username: string, password: string): Observable<User> {
 

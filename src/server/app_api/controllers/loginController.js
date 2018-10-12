@@ -23,13 +23,9 @@ module.exports.loginCreate = function(req, res) {
 };
 
 module.exports.loginGetUser = function (request, res, next) {
-
-
-    mongoose.model('userModel', userSchema).findOne({username: request.params.username}, function(err, user) {
+    mongoose.model('userModel', userSchema).find({username: request.params.username}, "_id username schedules exerciseLogs", function(err, user) {
 
         if (err) return handleError(err);
-        
-        console.log("jeppetest: " + user);
 
         res.status(200).json(user);  
     });

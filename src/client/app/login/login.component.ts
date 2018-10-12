@@ -24,12 +24,13 @@ export class LoginComponent implements OnInit {
 
         this.userService.postLogin(username, password).subscribe(token => {
                 localStorage.setItem('token', JSON.stringify(token));
-
-                
-                this.userService.getUserLoggedIn(username).subscribe(user => alert(user.userName) ); //this.user = new User(0, "", "", [], [])
+                this.userService.getUserLoggedIn(username).subscribe(
+                    user => alert(user.username)
+                );
+                //this.user = new User(0, "", "", [], [])
                 this.setUser.emit(this.user);
             },
-            err => console.log(err)
+        err => console.log(err)
         );
     }
 
