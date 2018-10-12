@@ -30,9 +30,6 @@ export class LoginComponent implements OnInit {
       res => {
         console.log(res)
         localStorage.setItem('token', JSON.stringify(res))
-        let token = localStorage.getItem('token')
-        let jsonToken = JSON.parse(token)
-        console.log("getting the token again:",jsonToken.token)
       },
       err => console.log(err)
     );

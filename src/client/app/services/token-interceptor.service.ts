@@ -17,7 +17,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     let token = JSON.stringify(userService.getBrowserToken())
     let requestWithToken = req.clone({
       setHeaders: {
-        Authorization: `bearer ${token}`
+        Authorization: `Bearer ${token}`
       }
     })
     return next.handle(requestWithToken)
