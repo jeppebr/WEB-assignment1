@@ -50,6 +50,11 @@ export class UserService {
   getBrowserToken() { 
     let token = localStorage.getItem('token')
     let jsonToken = JSON.parse(token)
-    return jsonToken.token
+
+    if (jsonToken == null) {
+        console.log("No token in localstorage")
+    } else {
+        return jsonToken.token
+    }
   }
 }

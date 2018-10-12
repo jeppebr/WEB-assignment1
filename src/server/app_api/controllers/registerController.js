@@ -1,7 +1,6 @@
 const schema = require('../models/schedule')
 var mongoose = require('mongoose');
-const jwt = require('jsonwebtoken')
-
+var jwt = require('../jwt/jwt')
 
 module.exports.registerCreate = function(req, res) {
     let userData = req.body 
@@ -14,15 +13,10 @@ module.exports.registerCreate = function(req, res) {
     console.log(req.body.password)
     
     // If user has been succesfully saved 
-    let username = req.body.username
+    let id = req.body.username
+    jwt.sign(id, (token) => {
+        res.status(200).send({token})
+    })
     // TODO use the database identifier instead of username here, since username might not be unique
-    console.log(username._id) // <-- like this 
-    
-    let payload = { subject: username }
-    let token = jwt.sign(payload, 'secretkeythatisverylongandanoying')
-    res.status(200).send({token})
-
-    // res
-    // .status(200)
-    // .json({"message" : "Register request received"});
+    //console.log(username._id) // <-- like this 
 };
