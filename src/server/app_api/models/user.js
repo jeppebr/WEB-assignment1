@@ -7,6 +7,7 @@ var crypto = require("crypto");
 var userSchema = new Schema({
     username: String,
     password: String,
+    token: String,
     salt: String,
     schedules: [scheduleSchema],
     exerciseLogs: [exerciseLogSchema],
