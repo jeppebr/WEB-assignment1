@@ -14,12 +14,3 @@ module.exports.registerCreate = function(req, res) {
         res.status(200).send({token})
     });
 };
-
-module.exports.temp = function (req, res) {
-    mongoose.model('userModel', userSchema).find({}, '', function (err, users) {
-        if (err) return handleError(err);
-
-        res.status(200).json(users);
-    });
-
-}

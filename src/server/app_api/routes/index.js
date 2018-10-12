@@ -28,7 +28,6 @@ router.route("/users/:userId/exerciseLogs")
 
 //Authentication
 router.route('/login')
-    .get(ctrlRegister.temp)
     .post(ctrlLogin.loginCreate);
 
 router.route('/register')
