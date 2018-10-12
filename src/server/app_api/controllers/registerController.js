@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 module.exports.registerCreate = function(req, res) {
     mongoose.model('userModel', userSchema).create({}, function (err, user) {
         if (err) return handleError(err);
+
         user.username = req.body.username;
         user.setPassword(req.body.password);
         user.save();

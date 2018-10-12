@@ -32,7 +32,7 @@ export class SchedulesComponent implements OnInit {
 
     //Schedules
     deleteSchedule(schedule: Schedule) {
-        const scheduleIndex = this.schedules.findIndex(schedule => schedule._id === schedule._id);
+        const scheduleIndex = this.schedules.findIndex(x => x._id === schedule._id);
 
         this.scheduleService.deleteSchedule(schedule).subscribe();
         this.schedules.splice(scheduleIndex, 1);
@@ -56,7 +56,7 @@ export class SchedulesComponent implements OnInit {
     }
 
     deleteExercise(schedule: Schedule, exercise: Exercise) {
-        const exerciseIndex = schedule.exercises.findIndex(exercise => exercise._id === exercise._id)
+        const exerciseIndex = schedule.exercises.findIndex(x => x._id === exercise._id)
 
         this.exerciseService.deleteExercise(schedule, exercise).subscribe();
         schedule.exercises.splice(exerciseIndex, 1);
@@ -66,7 +66,6 @@ export class SchedulesComponent implements OnInit {
         const newExerciseLog = new ExerciseLog(0, exercise.exerciseName, Date.now());
         this.user.exerciseLogs.push(newExerciseLog);
 
-        console.log(exercise.exerciseName);
         const body = {
             exerciseName: exercise.exerciseName,
             dateTime: Date.now()

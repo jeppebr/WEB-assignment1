@@ -22,14 +22,7 @@ export class ScheduleService {
   }
 
   postSchedule(): Observable<Schedule> {
-      // TODO add userId to connect new schedule to that user
-      let options = {
-        headers: new HttpHeaders({
-          "Content-Type": 'application/json'
-        })
-      };
-
-      return this.http.post<Schedule>(`${API_URL}/schedules`, "", options);
+      return this.http.post<Schedule>(`${API_URL}/schedules`, "");
   }
 
   deleteSchedule(schedule: Schedule): Observable<Schedule> {

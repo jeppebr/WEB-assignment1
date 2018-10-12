@@ -24,8 +24,8 @@ module.exports.loginCreate = function(req, res) {
     });
 };
 
-module.exports.loginGetUser = function (request, res, next) {
-    mongoose.model('userModel', userSchema).find({username: request.params.username}, "_id username schedules exerciseLogs", function(err, user) {
+module.exports.loginGetUser = function (req, res) {
+    mongoose.model('userModel', userSchema).find({username: req.params.username}, "_id username schedules exerciseLogs", function(err, user) {
 
         if (err) return handleError(err);
 

@@ -19,12 +19,9 @@ export class LoginComponent implements OnInit {
     ) {}
 
     postLogin(username: string, password: string) {
-
         this.userService.postLogin(username, password).subscribe(token => {
                 localStorage.setItem('token', JSON.stringify(token));
-                this.userService.getUserLoggedIn(username).subscribe(
-                    user => this.setUser.emit(user)
-                );
+                this.getLoggedInUser(username);
             },
             err => console.log(err)
         );
@@ -34,11 +31,8 @@ export class LoginComponent implements OnInit {
         this.userService.postRegister(username, password)
             .subscribe(
                 res => {
-                    console.log(res)
                     localStorage.setItem('token', JSON.stringify(res));
-                    this.userService.getUserLoggedIn(username).subscribe(
-                        user => this.setUser.emit(user)
-                    );
+                    this.getLoggedInUser(username);
                 },
                 err => console.log(err)
             );
@@ -54,6 +48,12 @@ export class LoginComponent implements OnInit {
         const userName = JSON.stringify(form.value.loginUserName)
         const password = JSON.stringify(form.value.loginPassword)
         this.postLogin(userName, password);
+    }
+
+    getLoggedInUser(username: string){
+        this.userService.getUserLoggedIn(username).subscribe(
+            user => this.setUser.emit(user)
+        );
     }
 
     logout() {
