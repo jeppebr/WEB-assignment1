@@ -9,14 +9,11 @@
                     <th>Set</th>
                     <th>Reps/time</th>
                     <th></th>
-                    <th class="buttonColumn">
-                        <form class="form-group">
-                            <input type="hidden" name="scheduleId" value="5b97a214543b02176c3a6205">
-                            <button class="btn btn-default float-right" (click)="deleteSchedule(schedule)"
-                                    type='button'>
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </form>
+                    <th class="buttonColumn" *ngIf='user'>
+                        <button class="btn btn-default float-right" (click)="deleteSchedule(schedule)"
+                                type='button'>
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </th>
                     </thead>
                     <tbody>
@@ -25,20 +22,20 @@
                         <td>{{exercise.description}}</td>
                         <td>{{exercise.set}}</td>
                         <td>{{exercise.reps}}</td>
-                        <td>
+                        <td *ngIf='user'>
                             <button class="btn btn-default float-right"
                                     (click)="logExercise(exercise)" type='button'>
                                 <i class="fas fa-dumbbell"></i>
                             </button>
                         </td>
-                        <td>
+                        <td *ngIf='user'>
                             <button class="btn btn-default float-right"
                                     (click)="deleteExercise(schedule, exercise)" type='button'>
                                 <i class="fas fa-times"></i>
                             </button>
                         </td>
                     </tr>
-                    <tr>
+                    <tr *ngIf='user'>
                         <td>
                             <input class="form-control" name="exerciseName" type="text" placeholder="Exercise" required
                                    ngModel>
@@ -65,16 +62,16 @@
                 </table>
             </form>
         </div>
-        <button class="add-schedule-button" (click)="postSchedule()" type='button'>Create a new schedule</button>
+        <button class="add-schedule-button" *ngIf='user' (click)="postSchedule()" type='button'>Create a new schedule</button>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5" *ngIf='user'>
         <table class="table">
             <thead class="table-active">
             <th>Time</th>
             <th>Exercise</th>
             </thead>
             <tbody>
-            <tr *ngFor="let exerciseLog of exerciseLogs">
+            <tr *ngFor="let exerciseLog of user.exerciseLogs">
                 <td>{{exerciseLog.dateTime | date:'yyyy-MM-dd HH:mm'}}</td>
                 <td>{{exerciseLog.exercise.exerciseName}}</td>
             </tr>

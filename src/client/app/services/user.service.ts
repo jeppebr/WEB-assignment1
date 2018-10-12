@@ -10,6 +10,17 @@ import {API_URL} from '../../app-config';
 export class UserService {
   constructor(private http: HttpClient) {}
 
+  getUserLoggedIn(username: string): Observable<User> {
+
+    let options = {
+      headers: new HttpHeaders({
+        "Content-Type": 'application/json',
+        "InterceptorSkipHeader": ''
+      })
+    };
+    return this.http.get<User>(`${API_URL}/login/${username}`, options);
+  }
+
   postLogin(username: string, password: string): Observable<User> {
 
     let options = {

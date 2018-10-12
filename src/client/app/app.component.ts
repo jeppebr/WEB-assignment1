@@ -1,26 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from "./models/user";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'myFitness';
-  private _user: User;
 
-  constructor() {}
+    user: User;
 
-  ngOnInit() {}
+    updateUser(value: User) {
+        this.user = value;
+    }
 
-
-  getUser(): User {
-      return this._user;
-  }
-
-  setUser(value: User) {
-      this._user = value;
-  }
+    getUser() {
+        return this.user;
+    }
 }

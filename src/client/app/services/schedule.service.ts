@@ -12,7 +12,13 @@ export class ScheduleService {
   constructor(private http: HttpClient) {}
 
   getSchedules(): Observable<Schedule[]> {
-      return this.http.get<Schedule[]>(`${API_URL}/schedules`);
+      let options = {
+          headers: new HttpHeaders({
+              "Content-Type": 'application/json',
+              "InterceptorSkipHeader": ''
+          })
+      };
+      return this.http.get<Schedule[]>(`${API_URL}/schedules`, options);
   }
 
   postSchedule(): Observable<Schedule> {

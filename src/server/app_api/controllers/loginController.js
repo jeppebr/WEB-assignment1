@@ -1,22 +1,34 @@
-
+var userSchema = require('../models/user');
+var mongoose = require('mongoose');
 const jwt = require('jsonwebtoken')
 
 
-module.exports.loginCreate = function(req, res) { 
-    // console.log(req.query.password)
-    // console.log(req.query.userName)
-    console.log("logging in the user ")
-    console.log(req.body)
-    
-    console.log(req.body.username)
-    console.log(req.body.password)
-    let username = req.body.username
-    // check if the username and password is in the DB 
-    // if yes give them a JWT and show a logout button 
+module.exports.loginCreate = function(req, res) {
+    mongoose.model('userModel', userSchema).find({username: req.body.username}, function (err, users) {
+        if (err) return next(err);
 
-    // on succesfull login 
+        if (users[0] !== undefined) {
+            const user = users[0];
+            if(user.validatePassword(req.body.password)){
+                let payload = { subject: user.username };
+                let token = jwt.sign(payload, 'secret');
 
-    let payload = { subject: username }
-    let token = jwt.sign(payload, 'secretkeythatisverylongandanoying')
-    res.status(200).send({token})
+                user.token = token;
+                user.save();
+
+                res.status(200).json(token);
+            }
+        }
+
+        res.status(401).send();
+    });
+};
+
+module.exports.loginGetUser = function (request, res, next) {
+    mongoose.model('userModel', userSchema).find({username: request.params.username}, "_id username schedules exerciseLogs", function(err, user) {
+
+        if (err) return handleError(err);
+
+        res.status(200).json(user[0]);
+    });
 };

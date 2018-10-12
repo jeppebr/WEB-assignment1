@@ -6,10 +6,10 @@
             <h1>Welcome to {{ title }}</h1>
         </div>
         <div class="col-md-5">
-            <app-login></app-login>
+            <app-login (setUser)="updateUser($event)" ></app-login>
         </div>
     </div>
     <br/>
-    <app-schedules></app-schedules>
+    <app-schedules [user]="user" ></app-schedules>
 </div>
 
