@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var scheduleSchema = require('../models/schedule');
 var exerciseSchema = require('../models/exercise');
+const jwt = require('../jwt/jwt')
 
 module.exports.getExercises = function(req, res, next) {
     mongoose.model('exerciseModel', exerciseSchema).find({}, '', function (err, exercises) {
@@ -11,6 +12,7 @@ module.exports.getExercises = function(req, res, next) {
 }
 
 module.exports.postExercise = function (request, res, next) {
+
     mongoose.model('scheduleModel', scheduleSchema).findById(request.params.scheduleId, function (err, schedule) {
         if (err) return handleError(err);
 
@@ -32,6 +34,7 @@ module.exports.postExercise = function (request, res, next) {
 };
 
 module.exports.deleteExercise = function (request, res, next) {
+ 
     mongoose.model('scheduleModel', scheduleSchema).findById(request.params.scheduleId, function (err, schedule) {
         if (err) return handleError(err);
 

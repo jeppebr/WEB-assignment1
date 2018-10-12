@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Schedule} from "../models/schedule";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {API_URL} from '../../app-config';
 
@@ -17,7 +17,13 @@ export class ScheduleService {
 
   postSchedule(): Observable<Schedule> {
       // TODO add userId to connect new schedule to that user
-      return this.http.post<Schedule>(`${API_URL}/schedules`, "");
+      let options = {
+        headers: new HttpHeaders({
+          "Content-Type": 'application/json'
+        })
+      };
+
+      return this.http.post<Schedule>(`${API_URL}/schedules`, "", options);
   }
 
   deleteSchedule(schedule: Schedule): Observable<Schedule> {

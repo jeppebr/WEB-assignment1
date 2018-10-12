@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const ctrlSchedules= require('../controllers/schedulesController');
 const ctrlExercises= require('../controllers/exercisesController');
+const ctrlExerciseLogs= require('../controllers/exerciseLogsController');
 const ctrlLogin= require('../controllers/loginController');
 const ctrlRegister = require('../controllers/registerController');
 const ctrlLogout = require('../controllers/logoutController');
@@ -20,6 +21,10 @@ router.route("/schedules/:scheduleId/exercises")
     .post(ctrlExercises.postExercise)
 router.route("/schedules/:scheduleId/exercises/:exerciseId")
     .delete(ctrlExercises.deleteExercise);
+
+//exercise logs
+router.route("/users/:userId/exerciseLogs")
+    .post(ctrlExerciseLogs.postExerciseLog)
 
 //Authentication
 router.route('/login')
