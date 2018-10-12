@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {UserService} from "../services/user.service";
 import {SchedulesComponent} from "../schedules/schedules.component";
+import {User} from "../models/user";
 
 @Component({
     selector: "app-login",
@@ -11,14 +12,22 @@ import {SchedulesComponent} from "../schedules/schedules.component";
 })
 export class LoginComponent implements OnInit {
 
+    user: User;
+
     constructor(
         private userService: UserService,
         private schedulesComponent: SchedulesComponent
     ) {}
 
     postLogin(username: string, password: string) {
+
+       // this.userService.getUserLoggedIn(username).subscribe(user => this.user = user);
+
         this.userService.postLogin(username, password).subscribe(token => {
                 localStorage.setItem('token', JSON.stringify(token));
+                
+                //this.schedulesComponent.setUser(this.user);
+
                 // this.schedulesComponent.setUser(new User(0, "", "", [], []));
             },
             err => console.log(err)

@@ -7,7 +7,7 @@ module.exports.loginCreate = function(req, res) {
     mongoose.model('userModel', userSchema).find({username: req.body.username}, function (err, users) {
         if (err) return next(err);
 
-        console.log(users[0]);
+        //console.log(users[0]);
         if (users[0] !== undefined) {
             const user = users[0];
             if(user.validatePassword(req.body.password)){
@@ -19,5 +19,18 @@ module.exports.loginCreate = function(req, res) {
         }
 
         res.status(401).send();
+    });
+};
+
+module.exports.loginGetUser = function (request, res, next) {
+
+
+    mongoose.model('userModel', userSchema).findOne({username: request.params.username}, function(err, user) {
+
+        if (err) return handleError(err);
+        
+        console.log("jeppetest: " + user);
+
+        res.status(200).json(user);  
     });
 };

@@ -30,6 +30,9 @@ router.route("/users/:userId/exerciseLogs")
 router.route('/login')
     .post(ctrlLogin.loginCreate);
 
+router.route('/login/:username')
+    .get(ctrlLogin.loginGetUser);
+
 router.route('/register')
     .post(ctrlRegister.registerCreate);
 
