@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router'
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
-import {RegisterComponent} from './register/register.component';
 import {SchedulesComponent} from './schedules/schedules.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ScheduleService} from "./services/schedule.service";
@@ -18,7 +17,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
     SchedulesComponent
   ],
   imports: [

@@ -63,17 +63,14 @@ export class SchedulesComponent implements OnInit {
     }
 
     logExercise(exercise: Exercise) {
-        const newExerciseLog = new ExerciseLog(0, this.user, exercise, Date.now());
+        const newExerciseLog = new ExerciseLog(0, exercise.exerciseName, Date.now());
         this.user.exerciseLogs.push(newExerciseLog);
 
+        console.log(exercise.exerciseName);
         const body = {
-            exercise: exercise,
-            time: Date.now()
+            exerciseName: exercise.exerciseName,
+            dateTime: Date.now()
         };
-        this.exerciseLogService.postExerciseLog(body);
-    }
-
-    setUser(value: User) {
-        this.user = value;
+        this.exerciseLogService.postExerciseLog(this.user, body).subscribe();
     }
 }

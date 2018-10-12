@@ -1,6 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {UserService} from "../services/user.service";
+import {User} from "../models/user"
 
 @Component({
     selector: "app-login",
@@ -10,6 +11,7 @@ import {UserService} from "../services/user.service";
 })
 export class LoginComponent implements OnInit {
 
+    @Input() user: User;
     @Output() setUser: EventEmitter<any> = new EventEmitter();
 
     constructor(
@@ -33,7 +35,10 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 res => {
                     console.log(res)
-                    localStorage.setItem('token', JSON.stringify(res))
+                    localStorage.setItem('token', JSON.stringify(res));
+                    this.userService.getUserLoggedIn(username).subscribe(
+                        user => this.setUser.emit(user)
+                    );
                 },
                 err => console.log(err)
             );
@@ -53,6 +58,7 @@ export class LoginComponent implements OnInit {
 
     logout() {
         localStorage.removeItem('token');
+        this.setUser.emit(null);
     }
 
     ngOnInit() {

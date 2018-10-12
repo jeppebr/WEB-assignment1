@@ -18,8 +18,8 @@ export class TokenInterceptorService implements HttpInterceptor {
           const headers = req.headers.delete("InterceptorSkipHeader");
           return next.handle(req.clone({ headers }));
       }
-    let userService = this.injector.get(UserService)
-    let token = JSON.stringify(userService.getBrowserToken())
+    let userService = this.injector.get(UserService);
+    let token = userService.getBrowserToken();
     let requestWithToken = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`

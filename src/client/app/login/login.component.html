@@ -1,23 +1,34 @@
+<form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)" *ngIf='!user'>
+    <div class="row">
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="registerUserName" id="registerUserName" placeholder="username"
+                   ngModel>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" type="password" name="registerPassword" id="registerPassword"
+                   placeholder="password"
+                   ngModel>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default" type="submit">Register</button>
+        </div>
+    </div>
+</form>
+<br/>
+<form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)" *ngIf='!user'>
+    <div class="row">
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="loginUserName" id="loginUserName" placeholder="username"
+                   ngModel>
+        </div>
+        <div class="col-md-4">
+            <input class="form-control" type="password" name="loginPassword" id="loginPassword" placeholder="password"
+                   ngModel>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default" type="submit">login</button>
+        </div>
+    </div>
+</form>
 
-
-    <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
-        <label for="email">Username</label>
-        <input type="text" name="registerUserName" id="registerUserName" ngModel>
-      
-        <label for="password">Password</label>
-        <input type="password" name="registerPassword" id="registerPassword" ngModel>
-      
-        <button type="submit">Register</button>
-      </form>
-
-      <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm)">
-          <label for="email">Username</label>
-          <input type="text" name="loginUserName" id="loginUserName" ngModel>
-        
-          <label for="password">Password</label>
-          <input type="password" name="loginPassword" id="loginPassword" ngModel>
-        
-          <button type="submit">login</button>
-    </form>
-
-    <button (click)="logout()" type='button'>Logout</button>
+<button (click)="logout()" class="btn btn-default" type='button' *ngIf='user'>Logout</button>
