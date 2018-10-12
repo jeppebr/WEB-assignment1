@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { User } from "../models/user";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import {Injectable} from "@angular/core";
+import {User} from "../models/user";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
 import {API_URL} from '../../app-config';
 
 @Injectable({
@@ -14,7 +14,8 @@ export class UserService {
 
     let options = {
       headers: new HttpHeaders({
-        "Content-Type": 'application/json'
+        "Content-Type": 'application/json',
+        "InterceptorSkipHeader": ''
       }),
       body: {
         username: user.userName,
@@ -29,7 +30,8 @@ export class UserService {
 
     let options = {
       headers: new HttpHeaders({
-        "Content-Type": 'application/json'
+        "Content-Type": 'application/json',
+        "InterceptorSkipHeader": ''
       }),
       body: {
         username: user.userName,
