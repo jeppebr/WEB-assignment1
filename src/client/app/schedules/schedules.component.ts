@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Schedule} from "../models/schedule";
 import {ScheduleService} from "../services/schedule.service";
 import {ExerciseService} from "../services/exercise.service";
@@ -6,31 +6,27 @@ import {NgForm} from "@angular/forms";
 import {ExerciseLog} from "../models/exerciseLog";
 import {Exercise} from "../models/exercises";
 import {ExerciseLogService} from "../services/exercise-log.service";
-import {AppComponent} from "../app.component";
+import {User} from "../models/user";
 
 @Component({
     selector: 'app-schedules',
     providers: [ScheduleService],
     templateUrl: './schedules.component.html',
-    styleUrls: ['./schedules.component.css']
+    styleUrls: ['./schedules.component.css'],
 })
 
 export class SchedulesComponent implements OnInit {
 
     schedules: Schedule[] = [];
-    exerciseLogs: ExerciseLog[] = [];
+    @Input() user: User;
 
     constructor(
         private scheduleService: ScheduleService,
         private exerciseService: ExerciseService,
-        private exerciseLogService: ExerciseLogService,
-        private appComponent: AppComponent
+        private exerciseLogService: ExerciseLogService
     ) {}
 
     ngOnInit() {
-        if (this.appComponent.getUser() != undefined){
-            this.exerciseLogs = this.appComponent.getUser().exerciseLogs;
-        }
         this.scheduleService.getSchedules().subscribe(schedules => this.schedules = schedules);
     }
 
@@ -67,13 +63,14 @@ export class SchedulesComponent implements OnInit {
     }
 
     logExercise(exercise: Exercise) {
-        const newExerciseLog = new ExerciseLog(0, this.appComponent.getUser(), exercise, Date.now());
-        this.exerciseLogs.push(newExerciseLog);
+        const newExerciseLog = new ExerciseLog(0, exercise.exerciseName, Date.now());
+        this.user.exerciseLogs.push(newExerciseLog);
 
+        console.log(exercise.exerciseName);
         const body = {
-            exercise: exercise,
-            time: Date.now()
+            exerciseName: exercise.exerciseName,
+            dateTime: Date.now()
         };
-        this.exerciseLogService.postExerciseLog(body);
+        this.exerciseLogService.postExerciseLog(this.user, body).subscribe();
     }
 }

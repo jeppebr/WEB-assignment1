@@ -10,6 +10,17 @@ import {API_URL} from '../../app-config';
 export class UserService {
   constructor(private http: HttpClient) {}
 
+  getUserLoggedIn(username: string): Observable<User> {
+
+    let options = {
+      headers: new HttpHeaders({
+        "Content-Type": 'application/json',
+        "InterceptorSkipHeader": ''
+      })
+    };
+    return this.http.get<User>(`${API_URL}/login/${username}`, options);
+  }
+
   postLogin(username: string, password: string): Observable<User> {
 
     let options = {
@@ -48,8 +59,12 @@ export class UserService {
 
   // returns local browser token
   getBrowserToken() { 
-    let token = localStorage.getItem('token')
-    let jsonToken = JSON.parse(token)
-    return jsonToken.token
+    let token = localStorage.getItem('token');
+
+    if (token == null) {
+        console.log("No token in localstorage");
+    } else {
+        return token;
+    }
   }
 }
