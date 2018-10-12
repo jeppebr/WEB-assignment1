@@ -31,4 +31,8 @@ router.route('/login')
 router.route('/register')
 .post(ctrlRegister.registerCreate);
 
+router.route('/registerhash')
+.post(ctrlRegister.registerCreateHash);
+
+
 module.exports = router;
