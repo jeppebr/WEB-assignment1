@@ -10,7 +10,7 @@ import {API_URL} from '../../app-config';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  postLogin(user: User): Observable<User> {
+  postLogin(username: string, password: string): Observable<User> {
 
     let options = {
       headers: new HttpHeaders({
@@ -18,15 +18,15 @@ export class UserService {
         "InterceptorSkipHeader": ''
       }),
       body: {
-        username: user.userName,
-        password: user.password
+        username: username,
+        password: password
       }
     };
 
     return this.http.post<User>(`${API_URL}/login`, options.body, options);
   }
 
-  postRegister(user: User): Observable<User> {
+  postRegister(username: string, password: string): Observable<User> {
 
     let options = {
       headers: new HttpHeaders({
@@ -34,8 +34,8 @@ export class UserService {
         "InterceptorSkipHeader": ''
       }),
       body: {
-        username: user.userName,
-        password: user.password
+        username: username,
+        password: password
       }
     };
 
