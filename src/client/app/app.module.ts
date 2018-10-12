@@ -8,7 +8,7 @@ import {SchedulesComponent} from './schedules/schedules.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ScheduleService} from "./services/schedule.service";
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
-import { TokenInterceptorService } from './token-interceptor.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent }

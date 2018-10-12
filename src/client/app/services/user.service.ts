@@ -44,4 +44,10 @@ export class UserService {
     return !!localStorage.getItem('token')
   }
 
+  // returns local browser token
+  getBrowserToken() { 
+    let token = localStorage.getItem('token')
+    let jsonToken = JSON.parse(token)
+    return jsonToken.token
+  }
 }
