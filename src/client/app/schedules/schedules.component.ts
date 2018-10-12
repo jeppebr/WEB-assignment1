@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Schedule} from "../models/schedule";
 import {ScheduleService} from "../services/schedule.service";
 import {ExerciseService} from "../services/exercise.service";
@@ -12,13 +12,13 @@ import {User} from "../models/user";
     selector: 'app-schedules',
     providers: [ScheduleService],
     templateUrl: './schedules.component.html',
-    styleUrls: ['./schedules.component.css']
+    styleUrls: ['./schedules.component.css'],
 })
 
 export class SchedulesComponent implements OnInit {
 
     schedules: Schedule[] = [];
-    user: User;
+    @Input() user: User;
 
     constructor(
         private scheduleService: ScheduleService,

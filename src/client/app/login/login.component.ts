@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {UserService} from "../services/user.service";
-import {SchedulesComponent} from "../schedules/schedules.component";
+import {User} from "../models/user";
 
 @Component({
     selector: "app-login",
@@ -11,15 +11,17 @@ import {SchedulesComponent} from "../schedules/schedules.component";
 })
 export class LoginComponent implements OnInit {
 
+    @Output() setUser: EventEmitter<any> = new EventEmitter();
+
     constructor(
-        private userService: UserService,
-        private schedulesComponent: SchedulesComponent
+        private userService: UserService
     ) {}
 
     postLogin(username: string, password: string) {
         this.userService.postLogin(username, password).subscribe(token => {
                 localStorage.setItem('token', JSON.stringify(token));
-                // this.schedulesComponent.setUser(new User(0, "", "", [], []));
+                const user: User = new User(0, "", "", [], []);
+                this.setUser.emit(user);
             },
             err => console.log(err)
         );
